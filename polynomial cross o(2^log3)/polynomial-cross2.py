@@ -2,16 +2,18 @@ def divide_polynomial(p):
     n = len(p)
     pl = [0] * n
     pr = [0] * n
-    for i in range(n//2):
+    for i in range(n // 2):
         pl[i] = p[i]
-        pr[i] = p[i + n//2]
+        pr[i] = p[i + n // 2]
     return pl, pr
 
 
 def sum_polynomial(x, y):
-    n = len(x)
+    if len(x) == 1 and len(y) == 1:
+        return x[0] + y[0]
+    n = len(max(x, y)) // 2
     t = [0] * n
-    for i in range(n):
+    for i in range(0, n, 1):
         t[i] = x[i] + y[i]
     return t
 
@@ -22,7 +24,8 @@ def multiple_polynomial(a, b):
         return a[0] * b[0]
     al, ar = divide_polynomial(a)
     bl, br = divide_polynomial(b)
-    t1, t2 = sum_polynomial(al, ar), sum_polynomial(bl, br)
+    t1 = sum_polynomial(al, ar)
+    t2 = sum_polynomial(bl, br)
     print(t1, t2)
     print("--------")
     rm = multiple_polynomial(t1, t2)
